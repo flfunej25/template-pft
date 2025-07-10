@@ -23,21 +23,19 @@ export function generateBuktiLolosPDF(peserta, jsPDF, autoTable) {
     const noRegistrasi = `FLF-2024-${String(peserta.id).padStart(3, '0')}`;
 
     // ===== HEADER UTAMA =====
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(14);
+    doc.setFont('times new roman', 'bold');
+    doc.setFontSize(16);
     doc.text('FUTURE LEADERS FELLOWSHIP', doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
-    doc.text('CHAPTER UNIVERSITAS JEMBER', doc.internal.pageSize.getWidth() / 2, 27, { align: 'center' });
+    doc.text('CHAPTER UNIVERSITAS JEMBER', doc.internal.pageSize.getWidth() / 2, 30, { align: 'center' });
 
     doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.text('Jalan Kalimantan No. 37, Kampus Tegalboto', doc.internal.pageSize.getWidth() / 2, 33, { align: 'center' });
-    doc.text('Jember, Jawa Timur 68121', doc.internal.pageSize.getWidth() / 2, 38, { align: 'center' });
-    doc.text('flfchapterunej@gmail.com', doc.internal.pageSize.getWidth() / 2, 43, { align: 'center' });
+    doc.setFont('times new roman', 'normal');
+    doc.text('flfchapterunej@gmail.com', doc.internal.pageSize.getWidth() / 2, 40, { align: 'center' });
 
     // ===== JUDUL =====
     doc.setFontSize(16);
-    doc.setFont('helvetica', 'bold');
-    doc.text('BUKTI LOLOS SELEKSI', doc.internal.pageSize.getWidth() / 2, 55, { align: 'center' });
+    doc.setFont('times new roman', 'bold');
+    doc.text('BUKTI LOLOS SELEKSI', doc.internal.pageSize.getWidth() / 2, 50, { align: 'center' });
     
     // ===== GARIS PEMISAH =====
     doc.setLineWidth(1);
@@ -46,8 +44,8 @@ export function generateBuktiLolosPDF(peserta, jsPDF, autoTable) {
 
     // ===== PARAGRAF =====
     doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.text('Dengan ini menyatakan bahwa Calon Peserta dengan data di bawah ini:', 20, 70);
+    doc.setFont('times new roman', 'normal');
+    doc.text('Dengan ini menyatakan bahwa Calon Peserta dengan data di bawah ini:', 20, 60);
 
     // ===== TABEL =====
     doc.autoTable({
@@ -59,14 +57,22 @@ export function generateBuktiLolosPDF(peserta, jsPDF, autoTable) {
         ['Perguruan Tinggi', ': Universitas Jember'],
         ['Fakultas', `: ${getData(peserta['NAMA FAKULTAS'])}`],
       ],
-      styles: { cellPadding: 1.5, fontSize: 11 },
-      columnStyles: { 0: { fontStyle: 'bold', cellWidth: 55 } }
+      styles: { 
+        font: 'times new roman', // <-- FONT TABEL DIUBAH DI SINI
+        cellPadding: 1.5, 
+        fontSize: 12
+      },
+      columnStyles: { 
+        0: { 
+          fontStyle: 'bold', 
+          cellWidth: 55 
+        } 
+      }
     });
 
     let finalY = doc.lastAutoTable.finalY || 100;
 
-    doc.text('Telah dinyatakan LOLOS dan berhak untuk mengikuti program Future Leaders', 20, finalY + 10);
-    doc.text('Fellowship Chapter Universitas Jember.', 20, finalY + 17);
+    doc.text('Telah dinyatakan LOLOS dan berhak untuk mengikuti program Future Leaders Fellowship Chapter Universitas Jember.', 20, finalY + 10);
 
     // ===== KALIMAT PENUTUP =====
     doc.text('Wallahul Muwafieq Illa Aqwamith Tharieq', 20, finalY + 30);
